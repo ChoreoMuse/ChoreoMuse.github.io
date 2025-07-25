@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="A simple yet effective V2A-Mapper for open-domain vision-to-audio generation.">
+  <meta name="keywords" content="V2A-Mapper, Cross-modal generation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChoreoMuse: Robust Music-to-Dance Video Generation with Style Transfer and Beat-Adherent Motion</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/v2a.css">
+  <link rel="icon" href="./static/images/icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ChoreoMuse: Robust Music-to-Dance Video Generation with Style Transfer and Beat-Adherent Motion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=H356FF8AAAAJ&hl=en">Xuanchen Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.au/citations?user=jPj4ViQAAAAJ&hl=en">Heng Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.sydney.edu.au/engineering/about/our-people/academic-staff/tom-cai.html">Weidong Cai</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Sydney</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="todo"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video (coming soon)</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <!-- Huggingface Link. -->
+              <!-- <span class="link-block">
+                <a href="todo"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span>Hugging Face Space (coming soon)</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link.
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- teaser image -->
+<!--<section class="hero teaser">-->
+<!--  <div class="container is-max-desktop">-->
+<!--    <div class="hero-body">-->
+<!--      <img src="./static/images/teaser.png" width="719" height="245"-->
+<!--                 class="interpolation-image"-->
+<!--                 alt="A lightweight solution to utilize foundation models in vision-to-audio generation."/>-->
+<!--      <h2 class="subtitle has-text-centered">-->
+<!--        <b>DabFusion</b> Dance any beat with any person.-->
+<!--      </h2>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--/ teaser image -->
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Content. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Content</h2>
+        <div class="content has-text-justified">
+          <div class="toc" >
+          <ul>
+            <li>
+              <a href="#abstract">Abstract</a>
+            </li>
+            <li>
+              <a href="#method">Method</a>
+            </li>
+            <li>
+              <a href="#dab">Dance any beats with style transfer</a>
+            </li>
+
+            
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Content. -->
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" id="abstract">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+Modern artistic productions increasingly demand automated choreography generation that adapts to diverse musical styles and individual dancer characteristics. Existing approaches often fail to produce high-quality dance videos that harmonize with both musical rhythm and user-defined choreography styles, limiting their applicability in real-world creative contexts. To address this gap, we introduce ChoreoMuse, a diffusion-based framework that uses SMPL format parameters and their variation version as intermediaries between music and video generation, thereby overcoming the usual constraints imposed by video resolution. Critically, ChoreoMuse supports style-controllable, high-fidelity dance video generation across diverse musical genres and individual dancer characteristics, including the flexibility to handle any reference individual at any resolution. Our method employs a novel music encoder MotionTune to capture motion cues from audio, ensuring that the generated choreography closely follows the beat and expressive qualities of the input music. To quantitatively evaluate how well the generated dances match both musical and choreographic styles, we introduce two new metrics that measure alignment with the intended stylistic cues. Extensive experiments confirm that ChoreoMuse achieves state-of-the-art performance across multiple dimensions, including video quality, beat alignment, dance diversity, and style adherence, demonstrating its potential as a robust solution for a wide range of creative applications.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" id="method">Method</h2>
+        <div class="column is-full-width">
+          <img src="./static/images/training.png"
+                   class="interpolation-image"
+                   alt="Interpolate start reference image."
+               style="width: 100%; max-width: 1800px; height: auto;"/><br><br>
+
+
+          <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+            <p>
+The training framework of ChoreoMuse. In Stage one, the dance sequence generator is trained using a reference image \(x_0\) and a music clip \(m\). Music embeddings \(\boldsymbol{e}_m\) are extracted via MotionTune and Jukebox, while a classifier predicts the music type caption to determine the choreography style. The classifier’s feature vector \(\boldsymbol{e}_c\) is combined with a text-encoded choreography style using attention blocks to generate a final style embedding, which is then merged with \(\boldsymbol{e}_m\) as input to the diffusion model. Meanwhile, a pose extractor processes \(x_0\) to create an initial pose mask for constrained training. In Stage two, the video generator is trained by first aligning \(x_0\) with the generated dance sequence \( h_1^N \). The aligned sequence is then encoded by a pose encoder and used as a condition for the diffusion model, along with an encoded reference image. Finally, the diffusion model synthesizes the complete dance video \( \hat{x}_1^N \).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Interpolation -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" id="dab">Dance any beats with style transfer</h2>
+
+        <!-- Guided by image -->
+        <div class="content has-text-justified">
+          <p>ChoreoMuse enables style-controllable, high-fidelity dance video generation across diverse musical genres and dancer identities, with support for arbitrary reference individuals at any resolution. We showcase five individuals from different scenarios, each paired with the same music but exhibiting distinct choreography styles. </p>
+<div class="t">
+  <ul style="display: flex; margin: 0; padding: 0; list-style: none;">
+    <li style="margin: 0; padding: 0;">
+      <img src="static/ref_images/spiderman_im.jpg"
+           style="height: 150px; width: auto; object-fit: contain; display: block; margin: 0; padding: 0;" />
+    </li>
+    <li style="margin: 0; padding: 0;">
+      <img src="static/ref_images/ref-01.png"
+           style="height: 150px; width: auto; object-fit: contain; display: block; margin: 0; padding: 0;" />
+    </li>
+    <li style="margin: 0; padding: 0;">
+      <img src="static/ref_images/ref-10.png"
+           style="height: 150px; width: auto; object-fit: contain; display: block; margin: 0; padding: 0;" />
+    </li>
+    <li style="margin: 0; padding: 0;">
+      <img src="static/ref_images/cr7_im.jpg"
+           style="height: 150px; width: auto; object-fit: contain; display: block; margin: 0; padding: 0;" />
+    </li>
+    <li style="margin: 0; padding: 0;">
+      <img src="static/ref_images/ref-05.png"
+           style="height: 150px; width: auto; object-fit: contain; display: block; margin: 0; padding: 0;" />
+    </li>
+  </ul>
+</div>
+
+
+        <br/>
+        <!--/ Guided by image -->
+
+        <!-- Guided by text -->
+        <div class="content has-text-justified">
+        <h3 class="title is-4">Video generation with the same music piece but different choreography styles (High-resolution video may lag on first play. Replay if needed)</h3>
+          <h3 class="title is-5">House Dance</h3>
+             <ul style="display: flex; justify-content: space-around; align-items: center;">
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/spider_man/spiderman_mHO4_ch01.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Loose Legs</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/spider_man/spiderman_mHO4_ch02.mp4" type="video/mp4">
+               </video>
+                     <figcaption>Train</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+              <video width=150px height=auto controls>
+              <source src="static/spider_man/spiderman_mHO4_ch05.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Heel Step</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+                 <source src="static/spider_man/spiderman_mHO4_ch06.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Chase</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+            <source src="static/spider_man/spiderman_mHO4_ch07.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Shuffle</figcaption>
+              </figure>
+            </li>
+            </ul>
+
+            <h3 class="title is-5">Break Dance</h3>
+             <ul style="display: flex; justify-content: space-around; align-items: center;">
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/BR1/mBR1_ch02.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Twist</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/BR1/mBR1_ch03.mp4" type="video/mp4">
+               </video>
+                     <figcaption>Two Step</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+              <video width=150px height=auto controls>
+              <source src="static/BR1/mBR1_ch04.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Roll Two Step</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+                 <source src="static/BR1/mBR1_ch05.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Up Rock</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+            <source src="static/BR1/mBR1_ch06.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Battle Rock</figcaption>
+              </figure>
+            </li>
+            </ul>
+
+
+            <h3 class="title is-5">Ballet Jazz Dance</h3>
+             <ul style="display: flex; justify-content: space-around; align-items: center;">
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/JB0/mJB0_ch04.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Paddbre</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/JB0/mJB0_ch05.mp4" type="video/mp4">
+               </video>
+                     <figcaption>Pas De Chat</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+              <video width=150px height=auto controls>
+              <source src="static/JB0/mJB0_ch06.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Entrelace</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+                 <source src="static/JB0/mJB0_ch07.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Grand Jete</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+            <source src="static/JB0/mJB0_ch08.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Passe</figcaption>
+              </figure>
+            </li>
+            </ul>
+
+            <h3 class="title is-5">Lock Dance</h3>
+             <ul style="display: flex; justify-content: space-around; align-items: center;">
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=180px height=auto controls>
+              <source src="static/cr7/mLO1_ch10.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Twirl</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=180px height=auto controls>
+              <source src="static/cr7/mLO1_ch09.mp4" type="video/mp4">
+               </video>
+                     <figcaption>Point</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+              <video width=180px height=auto controls>
+              <source src="static/cr7/mLO1_ch08.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Crap</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=180px height=auto controls>
+                 <source src="static/cr7/mLO1_ch07.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Pacing</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=180px height=auto controls>
+            <source src="static/cr7/mLO1_ch06.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Rock Steady</figcaption>
+              </figure>
+            </li>
+            </ul>
+
+            <h3 class="title is-5">Waack Dance</h3>
+             <ul style="display: flex; justify-content: space-around; align-items: center;">
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/WA5/mWA5_ch01.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Twirl</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+               <video width=150px height=auto controls>
+              <source src="static/WA5/mWA5_ch02.mp4" type="video/mp4">
+               </video>
+                     <figcaption>Open</figcaption>
+              </figure>
+             </li>
+             <li style="margin: 0; padding: 0;">
+                 <figure style="text-align: center; margin: 0 10px;">
+              <video width=150px height=auto controls>
+              <source src="static/WA5/mWA5_ch03.mp4" type="video/mp4">
+              </video>
+                     <figcaption>Pose</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+                 <source src="static/WA5/mWA5_ch04.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Walk</figcaption>
+              </figure>
+            </li>
+            <li style="margin: 0; padding: 0;">
+                <figure style="text-align: center; margin: 0 10px;">
+             <video width=150px height=auto controls>
+            <source src="static/WA5/mWA5_ch05.mp4" type="video/mp4">
+             </video>
+                    <figcaption>Shake</figcaption>
+              </figure>
+            </li>
+            </ul>
+
+
+
+
+<!--          <ul style="display: flex; justify-content: space-around; align-items: center;">-->
+<!--            <li style="margin: 0; padding: 0;">-->
+<!--             <iframe src="./static/unseen/spiderman/mBR0.mp4" frameborder="0" allowfullscreen width="128" height="96"></iframe>-->
+<!--            </li>-->
+<!--            <li style="margin: 0; padding: 0;">-->
+<!--             <iframe src="./static/unseen/iron_crouch_video/mBR0.mp4" frameborder="0" allowfullscreen width="128" height="96"></iframe>-->
+<!--            </li >-->
+<!--            <li style="margin: 0; padding: 0;">-->
+<!--             <iframe src="./static/unseen/cr7/mBR0.mp4" frameborder="0" allowfullscreen width="128" height="96"></iframe>-->
+<!--            </li>-->
+<!--            <li style="margin: 0; padding: 0;">-->
+<!--             <iframe src="./static/unseen/iron/mBR0.mp4" frameborder="0" allowfullscreen width="128" height="96"></iframe>-->
+<!--            </li >-->
+<!--            <li style="margin: 0; padding: 0;">-->
+<!--             <iframe src="./static/unseen/comic/mBR0.mp4" frameborder="0" allowfullscreen width="128" height="96"></iframe>-->
+<!--            </li>-->
+
+<!--          </ul>-->
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</section>
+
+<!-- <a href="https://pages.cs.huji.ac.il/adiyoss-lab/im2wav/"> </a>-->
+<!-- <a href="https://salu133445.github.io/clipsonic/"></a> -->
+<!-- <a href="https://text-to-audio.github.io/"> --></a>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <div style="margin: 20px 0; padding: 20px; background-color: #f9f9f9; border-radius: 5px; border: 1px solid #ddd; max-width: 100%; width: 100%; box-sizing: border-box;">
+      <pre style="background-color: #f9f9f9; font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 1.5; margin: 0; padding: 10px; border: none; white-space: pre-wrap;">
+@inproceedings{choreomuse,
+  title     = {ChoreoMuse: Robust Music-to-Dance Video Generation with Style Transfer and Beat-Adherent Motion},
+  author    = {Xuanchen, Wang and Heng, Wang and Weidong, Cai},
+  booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia},
+  year      = {2025},
+}
+      </pre>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/DabFusion.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            <br>
+            Source code is mainly borrowed from <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> website.
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
